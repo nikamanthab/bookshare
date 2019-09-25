@@ -9,6 +9,9 @@ import Login from './pages/login'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './all.css'
 import firebase from 'firebase';
+import 'semantic-ui-css/semantic.min.css'
+
+
 
 
 // Your web app's Firebase configuration
@@ -28,9 +31,9 @@ class App extends React.Component {
 
   state = {
     page:"login",
-    username:"",
-    photo:"",
-    phone:null
+    username:"Nitin Nikamanth",
+    photo:"https://lh3.googleusercontent.com/a-/AAuE7mA7fTPD05uyYGOMnVmw6UTZwx0CydIqRvCRXT9AsQ" ,//""
+    phone:"9840740948" //null
   }
 
   handlesetState = (obj)=>{
@@ -38,6 +41,7 @@ class App extends React.Component {
   }
 
   changePage = (page)=>{
+    console.log("page:",page);
     this.setState({page});
   }
 
@@ -56,13 +60,20 @@ class App extends React.Component {
         changePage={this.changePage}/>
     }
     else if(this.state.page === "buy"){
-      pageprepare = <Buy changePage={this.changePage}/>
+      pageprepare = <Buy 
+        username={this.state.username}
+        changePage={this.changePage}/>
     }
     else if(this.state.page === "photoUpload"){
       pageprepare = <PhotoUpload changePage={this.changePage}/>
     } 
     else if(this.state.page === "form"){
-      pageprepare = <Form changePage={this.changePage}/>
+      pageprepare = <Form 
+          changePage={this.changePage}
+          username={this.state.username}
+          phone={this.state.phone}
+          photo={this.state.photo}
+        />
     }
 
 
