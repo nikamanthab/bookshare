@@ -4,7 +4,8 @@ import * as firebase from 'firebase';
 import 'firebase/firebase-auth';
 import {addUser, getAllUser} from './../utils/db';
 import OrbitDB from 'orbit-db';
-
+import logo from './../assets/mainpagelogo.png';
+import {Input} from 'semantic-ui-react';
 import IPFS  from 'ipfs';
 const ipfsOptions = {
     EXPERIMENTAL: {
@@ -126,7 +127,7 @@ class Login extends React.Component{
         if(this.state.newAccount == true){
             phoneIn = (
                 <div>
-                    <input type="number" value={this.props.phone} onChange={this.handleInputChange}/>
+                    <Input type="number" value={this.props.phone} onChange={this.handleInputChange}/>
                     <Button onClick={this.addNewUser}>Submit</Button>
                 </div>
             )
@@ -136,16 +137,27 @@ class Login extends React.Component{
         if(this.state.loggedIn == false){
             content = (
                 <div>
-                <Button onClick={this.handleSignIn}>Login</Button>
+                <div className="login-btn">
+                    <Button onClick={this.handleSignIn}>Login</Button>
+                </div>
+                <div className="login-btn">
+                <img style={{width:100,height:100}} src={logo} alt="nitin"/>
+                </div>
                 </div>
             )
         }
         else{
             content = (
-            <div>
-                <h1>{"Hi ,"+this.props.username}</h1>
-                <img alt="photo" className="profilepic center-div" src={this.props.photo}/>    
-                {phoneIn}
+            <div >
+                <div className="login-btn">
+                    <h1>{"Hi ,"+this.props.username}</h1>
+                </div>
+                <div className="profile-btn">
+                    <img alt="photo" className="profilepic center-div" src={this.props.photo}/>    
+                </div>
+                <div className="login-btn">
+                    {phoneIn}
+                </div>
             </div>
             )
         }

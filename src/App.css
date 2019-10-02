@@ -34,3 +34,19 @@
     transform: rotate(360deg);
   }
 }
+
+.login-btn{
+  /* border:2px solid red; */
+  align-content: center;
+  padding-top: 20vh;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-btn{
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  padding:5px;
+  margin:5px;
+}

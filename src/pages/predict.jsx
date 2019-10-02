@@ -3,24 +3,26 @@ import { model } from '@tensorflow/tfjs';
 import * as tf from '@tensorflow/tfjs';
 import CLASSES from './../assets/model/classes';
 import modelfile from './../assets/model/model.json';
-import {Button} from 'semantic-ui-react';
+import {Button,Input} from 'semantic-ui-react';
 // import image from './images/test.jpg';
 class Predict extends React.Component{
 
     state = {
         image:"",
-        prediction:""
+        prediction:"",
+        image2:""
     }
 
     constructor(props) {
         super(props);
         this.myimg = React.createRef();
+        this.titleimg = React.createRef();
       }
 
     componentDidMount = ()=>{
         // console.log(modelfile)
         (async ()=>{
-            let model = await tf.loadLayersModel('http://127.0.0.1:5000/model.json');
+            let model = await tf.loadLayersModel('http://192.168.43.233:5000/model.json');
             this.setState({model:model},()=>{
                 console.log("model loaded")
                 alert("model loaded")
@@ -59,6 +61,10 @@ class Predict extends React.Component{
         this.setState({prediction:pred});
     }
 
+    handleTitlePredict = ()=>{
+        console.log("predicting title...")
+    }
+
     handleProceed = ()=>{
         if(this.state.prediction == "book"){
             this.props.changePage('form')
@@ -71,11 +77,28 @@ class Predict extends React.Component{
     render = ()=>{
         return(
         <div>
-            <input type="file" onChange={this.handleImageUpload}/>
-            <button onClick={this.handlePredict}>predict</button>
-            <div className="result">{this.state.prediction}</div>
-            <img onClick={this.handlePredict} ref={this.myimg} src={this.state.image} alt="img not loaded" style={{width:300}}></img>
-            <Button color='orange' onClick={()=>{this.handleProceed()}}>Proceed</Button>
+            <Input type="file" onChange={this.handleImageUpload}/>
+            <div className="profile-btn">
+                <Button color='orange' onClick={this.handlePredict}>predict</Button>
+            </div>
+            <div className="result profile-btn">{this.state.prediction}</div>
+            <div className="profile-btn">
+                <img onClick={this.handlePredict} ref={this.myimg} src={this.state.image} alt="img not loaded" style={{width:300}}></img>
+            </div>
+
+            <Input type="file" onChange={this.handleImageUpload}/>
+            <div className="profile-btn">
+                <Button color='orange' onClick={this.handlePredict}>predict title</Button>
+            </div>
+            <div className="result profile-btn">{this.state.titleprediction}</div>
+            <div className="profile-btn">
+                <img onClick={this.handleTitlePredict} ref={this.titleimg} src={this.state.image2} alt="img not loaded" style={{width:300}}></img>
+            </div>
+
+
+            <div className="profile-btn">
+                <Button color='orange' onClick={()=>{this.handleProceed()}}>Proceed</Button>
+            </div>
         </div>
         )
     }

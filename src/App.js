@@ -30,7 +30,7 @@ firebase.initializeApp(firebaseConfig);
 class App extends React.Component {
 
   state = {
-    page:"login",
+    page:"photoUpload",
     username:"Nitin Nikamanth",
     photo:"https://lh3.googleusercontent.com/a-/AAuE7mA7fTPD05uyYGOMnVmw6UTZwx0CydIqRvCRXT9AsQ" ,//""
     phone:"9840740948" //null
